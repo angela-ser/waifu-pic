@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.json({
-    message: "This is a simple server to get images from waifu.pics",
+    message: "This is a server for get waifu pics. All rights reserved for ® HyNO",
   });
 });
 
