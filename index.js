@@ -12,7 +12,7 @@ const axios = require('axios');
 
 // تنظیمات
 
-const apiKey = 'YOUR_PASTEBIN_API_KEY'; // جایگزین کنید
+const apiKey = 'MhMeWOWshIhqCIrsmMDueY4IVGm_R-Ud'; // جایگزین کنید
 
 const apiEndpoint = 'https://pastebin.com/api/api_post.php';
 
