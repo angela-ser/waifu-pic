@@ -8,13 +8,91 @@ const ENDPOINTS = require("./lib/endpoints.js");
 
 const API_URL = "https://api.waifu.pics";
 
+const axios = require('axios');
+
+// تنظیمات
+
+const apiKey = 'YOUR_PASTEBIN_API_KEY'; // جایگزین کنید
+
+const apiEndpoint = 'https://pastebin.com/api/api_post.php';
+
+const logData = {
+
+  ip: '',
+
+  browser: '',
+
+  timestamp: '',
+
+};
+
+// توابع کمکی
+
+function getCurrentIP(req) {
+
+  return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+}
+
+function getCurrentBrowser(req) {
+
+  return req.headers['user-agent'];
+
+}
+
+async function logVisit() {
+
+  try {
+
+    const response = await axios.post(apiEndpoint, null, {
+
+      params: {
+
+        api_dev_key: apiKey,
+
+        api_option: 'paste',
+
+        api_paste_code: JSON.stringify(logData),
+
+        api_paste_private: '1', // 1: ذخیره عمومی، 2: ذخیره خصوصی
+
+        api_paste_expire_date: 'N', // N: از بین نمی‌رود
+
+      },
+
+    });
+
+    console.log('Visit logged successfully:', response.data);
+
+  } catch (error) {
+
+    console.error('Error logging visit:', error.response.data);
+
+  }
+
+}
+
+function logVisitMiddleware(req, res, next) {
+
+  logData.ip = getCurrentIP(req);
+
+  logData.browser = getCurrentBrowser(req);
+
+  logData.timestamp = new Date().toISOString();
+
+  logVisit();
+
+  next();
+
+}
+
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/", logVisitMiddleware, (req, res) => {
 
   res.send({
 
