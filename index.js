@@ -18,7 +18,9 @@ app.get("/", (req, res) => {
 
   res.send({
 
-    message: "This is a simple server to get images from waifu.pics",
+    message: "This is a server for get waifu pics. All rights reserved for ® HyNO                 Api Help:
+
+sfw Category: waifu , neko , shinobu , bully , cry , hug , kiss , lick , pat , smug , highfive , nom , bite , slap , wink , poke , dance , cringe , blush , happy                             Nsfw Category: waifu , neko , trap , blowjob                   sfw example: https://api-hyno-waifu.vercel.app/sfw/waifu\                         nsfw example: https://api-hyno-waifu.vercel.app/nsfw/waifu\",
 
   });
 
