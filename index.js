@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get("/", logVisitMiddleware, (req, res) => {
+app.get("/", (req, res) => {
 
   res.send({
 
